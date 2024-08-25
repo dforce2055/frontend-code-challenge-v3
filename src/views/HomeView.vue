@@ -12,13 +12,16 @@ import NoResults from '@/components/NoResults/NoResults.vue'
 import Footer from '@/components/Footer/Footer.vue'
 import CardList from '@/components/CardList/CardList.vue'
 import Loader from '@/components/Loader/Loader.vue'
+import DialogCharacterDetails from '@/components/DialogCharacterDetails/DialogCharacterDetails.vue'
 
 const appStore = useAppStore()
 const notificationStore = useNotificationsStore()
 
 const loading = ref(false)
+const showDetails = ref(false)
 const clearSearch = ref(false)
 const showNoResults = ref(true)
+const currentCharacter = ref<Character>()
 const characters = ref<Character[]>([])
 const charactersStored = computed(() => appStore.characters)
 
@@ -65,6 +68,10 @@ const onClearFilters = async () => {
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
+const onShowDetails = (character: Character) => {
+  currentCharacter.value = character
+  showDetails.value = true
+}
 
 watch([clearSearch, characters], () => {
   showNoResults.value = !characters.value.length
@@ -92,6 +99,7 @@ onMounted(() => {
 </script>
 <template>
   <section>
+    <DialogCharacterDetails v-if="showDetails" :character="currentCharacter" @close="showDetails = false" />
     <main>
       <Header @search="onSearchByName" :clear-search="clearSearch" />
       <Tabs @tab-selected="onTabSelected" />
@@ -104,7 +112,7 @@ onMounted(() => {
         </div>
         <div v-else>
           <Transition name="fade" mode="out-in">
-            <CardList v-if="!showNoResults" :characters="characters" />
+            <CardList v-if="!showNoResults" :characters="characters" @click="onShowDetails" />
           </Transition>
 
           <Transition name="fade" mode="out-in">

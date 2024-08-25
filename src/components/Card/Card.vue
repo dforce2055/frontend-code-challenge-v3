@@ -87,7 +87,8 @@ const emit = defineEmits<{
   (e: 'click', character: Character): void
 }>()
 
-const id = computed(() => props.character.id.toString())
+const randomIdNumber = Math.floor(Math.random() * 1000)
+const id = computed(() => randomIdNumber.toString())
 const loading = ref(true)
 const isOnFavorite = ref(false)
 

@@ -49,3 +49,7 @@ export const toQueryString = (params: any) => {
   const queryString = new URLSearchParams(params).toString()
   return queryString
 }
+
+export const waitFor = (ms = 1000) => {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}
