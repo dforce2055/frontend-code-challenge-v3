@@ -102,6 +102,7 @@ const emit = defineEmits<{
 const appStore = useAppStore()
 const notificationStore = useNotificationsStore()
 
+const characterIsOnFavorites = computed(() => appStore.favorites.some((c) => c.id === props.character.id))
 const episodes = ref<Episode[]>([
   {
     "id": 28,
@@ -165,18 +166,22 @@ const episodes = ref<Episode[]>([
   },
 ]
 )
-
 const relatedCharacters = computed(() => {
   const relatedCharacters = appStore.characters.filter((c) => c.id !== props.character.id)
   return relatedCharacters.slice(0, 2)
 })
 
+
 const onCloseDialog = () => {
   emit('close')
 }
 
-const onSetFavorite = (character: Character) => {
-  console.log('onSetFavorite', character)
+const onSetFavorite = () => {
+  if (characterIsOnFavorites.value) {
+    appStore.removeFavorite(props.character)
+  } else {
+    appStore.addFavorite(props.character)
+  }
 }
 
 const onClickCard = (character: Character) => {
@@ -212,7 +217,7 @@ const onShareCharacter = async () => {
           <img class="h-40 w-40 border-4 border-white rounded-full" :src="props.character.image"
             :alt="props.character.name" />
 
-          <FavoriteIcon :active="props.character.favorite" @click="onSetFavorite"
+          <FavoriteIcon :active="characterIsOnFavorites" @click="onSetFavorite"
             class="w-8 absolute -bottom-1 left-0 right-0 mx-auto" />
         </div>
         <div class="pt-3 text-center sm:pt-24 h-44 bg-gray-100 ">

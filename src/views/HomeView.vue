@@ -21,6 +21,7 @@ const loading = ref(false)
 const showDetails = ref(false)
 const clearSearch = ref(false)
 const showNoResults = ref(true)
+const filterByFavorites = ref(true)
 const currentCharacter = ref<Character>()
 const characters = ref<Character[]>([])
 const charactersStored = computed(() => appStore.characters)
@@ -32,6 +33,7 @@ const onSearchByName = async (search: string) => {
   characters.value = appStore.characters?.filter((character) => character.name.toLowerCase().includes(search.toLowerCase())) ?? []
 
   window.scrollTo({ top: 250, behavior: 'smooth' })
+  filterByFavorites.value = false
 }
 
 const onSearchByFilters = async (params: CharacterFilterParams) => {
@@ -42,6 +44,7 @@ const onSearchByFilters = async (params: CharacterFilterParams) => {
   if (gender) characters.value = appStore.characters?.filter((character) => character.gender === gender) ?? []
 
   window.scrollTo({ top: 250, behavior: 'smooth' })
+  filterByFavorites.value = false
 }
 
 const onTabSelected = (tab: TAB) => {
@@ -56,14 +59,23 @@ const onTabSelected = (tab: TAB) => {
 
 }
 
-const onShowFilters = (filter: boolean) => {
+const onFilterByFavorites = (filter: boolean) => {
   clearSearch.value = !clearSearch.value
-  console.log(filter)
+  filterByFavorites.value = !filterByFavorites.value
+
+  if (filter) {
+    characters.value = appStore.favorites
+  } else {
+    characters.value = appStore.characters
+  }
+
+  window.scrollTo({ top: 250, behavior: 'smooth' })
 }
 
 const onClearFilters = async () => {
   clearSearch.value = !clearSearch.value
   showNoResults.value = !showNoResults.value
+  filterByFavorites.value = !filterByFavorites.value
   await onSearchByName('')
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
@@ -105,7 +117,7 @@ onMounted(() => {
       <Tabs @tab-selected="onTabSelected" />
       <div class="min-h-[955px] max-w-[1030px] mx-auto px-8 my-12">
 
-        <FilterFavorite @favorite="onShowFilters" />
+        <FilterFavorite @favorite="onFilterByFavorites" :active="filterByFavorites" />
 
         <div v-if="loading" class="flex items-center justify-center h-[500px]">
           <Loader />

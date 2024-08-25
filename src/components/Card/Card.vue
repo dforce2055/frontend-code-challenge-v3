@@ -2,7 +2,9 @@
 import { computed, defineProps, type PropType, ref, onMounted } from 'vue'
 import type { Character } from '@/types';
 import { STATUS } from '@/types'
-import FavoriteIcon from '../FavoriteIcon/FavoriteIcon.vue';
+import { useAppStore } from '@/store'
+
+import FavoriteIcon from '../FavoriteIcon/FavoriteIcon.vue'
 
 const props = defineProps({
   character: {
@@ -87,10 +89,11 @@ const emit = defineEmits<{
   (e: 'click', character: Character): void
 }>()
 
+const appStore = useAppStore()
 const randomIdNumber = Math.floor(Math.random() * 1000)
 const id = computed(() => randomIdNumber.toString())
 const loading = ref(true)
-const isOnFavorite = ref(false)
+const characterIsOnFavorites = computed(() => appStore.favorites.some((c) => c.id === props.character.id))
 
 const statusStyles = computed(() => {
   if (props.character.status === STATUS.ALIVE) return 'bg-green-500'
@@ -99,11 +102,14 @@ const statusStyles = computed(() => {
   return 'bg-gray-300'
 })
 
-const onSetFavorite = () => {
-  isOnFavorite.value = !isOnFavorite.value
-  // TODO: save on store
-}
 
+const onSetFavorite = () => {
+  if (characterIsOnFavorites.value) {
+    appStore.removeFavorite(props.character)
+  } else {
+    appStore.addFavorite(props.character)
+  }
+}
 const onClickCard = () => {
   emit('click', props.character)
 }
@@ -129,7 +135,7 @@ onMounted(() => {
     <div class="relative">
       <img :id="id" :class="['w-36 h-36 rounded-l-md', loading ? 'opacity-0' : 'opacity-100']"
         :src="props.character.image" alt="character" />
-      <FavoriteIcon class="absolute bottom-1 right-1" @click="onSetFavorite" :active="isOnFavorite" />
+      <FavoriteIcon class="absolute bottom-1 right-1" @click="onSetFavorite" :active="characterIsOnFavorites" />
     </div>
     <!-- content -->
     <div class="flex flex-col gap-2  py-4">
