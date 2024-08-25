@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/valid-define-props -->
 <script setup lang="ts">
-import { defineProps, PropType, computed } from 'vue'
+import { defineProps, type PropType, computed } from 'vue'
 
 enum BUTTON_TYPE {
   PRIMARY = 'primary',
