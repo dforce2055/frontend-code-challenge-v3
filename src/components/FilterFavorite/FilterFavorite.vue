@@ -24,5 +24,3 @@ const emit = defineEmits(['favorite'])
     <FavoriteIcon @click="emit('favorite', !props.active)" :active="props.active" />
   </div>
 </template>
-
-<style lang="scss" scoped></style>
