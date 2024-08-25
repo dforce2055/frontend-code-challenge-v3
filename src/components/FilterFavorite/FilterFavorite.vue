@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineEmits, defineProps, ref, watch } from 'vue';
+import { defineEmits, defineProps } from 'vue';
 import FavoriteIcon from '../FavoriteIcon/FavoriteIcon.vue';
 
 const props = defineProps({

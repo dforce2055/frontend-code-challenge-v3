@@ -23,5 +23,3 @@ const onClickTab = (tab: TAB) => {
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped></style>

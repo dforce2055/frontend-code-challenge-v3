@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, onMounted } from 'vue'
+import { defineProps } from 'vue'
 import Button from '@/components/Button/Button.vue';
 
 const props = defineProps({
