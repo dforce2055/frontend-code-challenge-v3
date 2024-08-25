@@ -23,6 +23,7 @@ export interface Character {
   episode: string[]
   url: string
   created: Date
+  favorite: boolean
 }
 
 export enum GENDER {

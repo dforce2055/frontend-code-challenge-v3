@@ -212,7 +212,7 @@ const onShareCharacter = async () => {
           <img class="h-40 w-40 border-4 border-white rounded-full" :src="props.character.image"
             :alt="props.character.name" />
 
-          <FavoriteIcon :active="props.character.active" @click="onSetFavorite"
+          <FavoriteIcon :active="props.character.favorite" @click="onSetFavorite"
             class="w-8 absolute -bottom-1 left-0 right-0 mx-auto" />
         </div>
         <div class="pt-3 text-center sm:pt-24 h-44 bg-gray-100 ">
