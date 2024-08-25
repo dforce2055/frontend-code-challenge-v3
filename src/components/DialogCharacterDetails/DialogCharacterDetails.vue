@@ -210,6 +210,23 @@ const onShareCharacter = async () => {
     <div class=" bg-no-repeat bg-top bg-cover h-[220px]"
       style="background-image: url(/images/details.png); border-image: fill 0 linear-gradient(#0003 100%,#000 100%); background-position-y: -64px">
     </div>
+    <div class="absolute top-3 right-3 ">
+      <span class="w-30 h-30 cursor-pointer" @click="onCloseDialog">
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_719_1017)">
+            <path
+              d="M15 0.46875C6.97266 0.46875 0.46875 6.97266 0.46875 15C0.46875 23.0273 6.97266 29.5312 15 29.5312C23.0273 29.5312 29.5312 23.0273 29.5312 15C29.5312 6.97266 23.0273 0.46875 15 0.46875ZM22.125 18.8145C22.4004 19.0898 22.4004 19.5352 22.125 19.8105L19.8047 22.125C19.5293 22.4004 19.084 22.4004 18.8086 22.125L15 18.2812L11.1855 22.125C10.9102 22.4004 10.4648 22.4004 10.1895 22.125L7.875 19.8047C7.59961 19.5293 7.59961 19.084 7.875 18.8086L11.7188 15L7.875 11.1855C7.59961 10.9102 7.59961 10.4648 7.875 10.1895L10.1953 7.86914C10.4707 7.59375 10.916 7.59375 11.1914 7.86914L15 11.7188L18.8145 7.875C19.0898 7.59961 19.5352 7.59961 19.8105 7.875L22.1309 10.1953C22.4062 10.4707 22.4062 10.916 22.1309 11.1914L18.2812 15L22.125 18.8145Z"
+              fill="white" />
+          </g>
+          <defs>
+            <clipPath id="clip0_719_1017">
+              <rect width="30" height="30" fill="white" />
+            </clipPath>
+          </defs>
+        </svg>
+
+      </span>
+    </div>
     <div class="">
       <div class="">
         <div
