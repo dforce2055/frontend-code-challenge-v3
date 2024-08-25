@@ -9,6 +9,7 @@ const path = {
 }
 
 export interface CharacterFilterParams {
+  id?: string
   name?: string
   status?: STATUS
   species?: SPECIES
@@ -20,8 +21,7 @@ export const getCharacters = async (
   params?: CharacterFilterParams
 ): Promise<CharactersResponse> => {
   try {
-    const pathWithParams = params ? path.characters + '/?' + toQueryString(params) : path.characters
-    // debugger
+    const pathWithParams = params ? path.characters + toQueryString(params) : path.characters
     const response = await fetch(pathWithParams, {
       method: 'GET',
       cache: 'force-cache'

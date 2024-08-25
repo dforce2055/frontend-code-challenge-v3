@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onBeforeMount, onMounted, ref, watch } from 'vue'
 import { useAppStore, useNotificationsStore } from '../store'
 import { getCharacters, type CharacterFilterParams } from '../api/index'
 import type { Character } from '@/types'
 import { GENDER, STATUS, TAB } from '@/types'
+import { useRoute } from 'vue-router'
 
 import Header from '@/components/Header/Header.vue'
 import Tabs from '@/components/Tabs/Tabs.vue'
@@ -13,19 +14,21 @@ import Footer from '@/components/Footer/Footer.vue'
 import CardList from '@/components/CardList/CardList.vue'
 import Loader from '@/components/Loader/Loader.vue'
 import DialogCharacterDetails from '@/components/DialogCharacterDetails/DialogCharacterDetails.vue'
+import { waitFor } from '@/utils'
 
 const appStore = useAppStore()
 const notificationStore = useNotificationsStore()
+const route = useRoute()
 
 const loading = ref(false)
 const showDetails = ref(false)
 const clearSearch = ref(false)
 const showNoResults = ref(true)
-const filterByFavorites = ref(true)
+const filterByFavorites = ref(false)
 const currentCharacter = ref<Character>()
 const characters = ref<Character[]>([])
 const charactersStored = computed(() => appStore.characters)
-
+const paramId = computed(() => route.params.id)
 
 const onSearchByName = async (search: string) => {
   await onGetCharacters({ name: search })
@@ -89,6 +92,7 @@ watch([clearSearch, characters], () => {
   showNoResults.value = !characters.value.length
 })
 
+
 const onGetCharacters = async (params: CharacterFilterParams) => {
   try {
     loading.value = true
@@ -101,13 +105,43 @@ const onGetCharacters = async (params: CharacterFilterParams) => {
   }
 }
 
-onMounted(() => {
-  loading.value = true
-  setTimeout(() => {
-    characters.value = charactersStored.value
+const getCharacterById = async (id: string) => {
+  try {
+    loading.value = true
+    const character = await getCharacters({ id })
+    return character as unknown as Character
+  } catch (error) {
+    notificationStore.setErrorNotification()
+  } finally {
     loading.value = false
-  }, 1000)
+  }
+}
+
+const handleShowCharacterDetailsByParamId = async () => {
+  if (paramId.value) {
+    const character = await getCharacterById(String(paramId.value))
+    if (character) {
+      currentCharacter.value = character
+      showDetails.value = true
+    }
+    if (!character) {
+      await waitFor(1500)
+      showNoResults.value = true
+    }
+  }
+}
+
+
+onMounted(async () => {
+  loading.value = true
+  await waitFor(1000)
+  characters.value = charactersStored.value
+
+  await handleShowCharacterDetailsByParamId()
+  loading.value = false
+
 })
+
 </script>
 <template>
   <section>

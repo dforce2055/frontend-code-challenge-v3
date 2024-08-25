@@ -16,6 +16,11 @@ const router = createRouter({
       component: HomeView
     },
     {
+      path: '/character/:id',
+      name: 'character-details',
+      component: HomeView
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'not-found',
       component: () => import('../views/Error404View.vue')

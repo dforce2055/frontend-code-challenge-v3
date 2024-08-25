@@ -46,8 +46,11 @@ export const scrollToComponent = (
 }
 
 export const toQueryString = (params: any) => {
+  if (!params) return ''
+  if (params.id) return `/${params.id}`
+
   const queryString = new URLSearchParams(params).toString()
-  return queryString
+  return '/?' + queryString
 }
 
 export const waitFor = (ms = 1000) => {
