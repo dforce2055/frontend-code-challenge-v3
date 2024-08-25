@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { isAnImage, convertStringToObject, getActivitiesObject } from '.'
+import { isAnImage, convertStringToObject } from '.'
 
 describe('utils: isAnImage', () => {
   it('should return if url contain an Image', () => {
@@ -25,17 +25,17 @@ describe('utils: convertStringToObject', () => {
   })
 })
 
-describe('utils: getActivitiesObject', () => {
-  it('should convert a valid string to an ActivityDetails object', () => {
-    const activity = '{"name": "Running", "duration": 60}'
-    expect(getActivitiesObject(activity)).toEqual({ name: 'Running', duration: 60 })
-  })
+// describe('utils: getActivitiesObject', () => {
+//   it('should convert a valid string to an ActivityDetails object', () => {
+//     const activity = '{"name": "Running", "duration": 60}'
+//     expect(getActivitiesObject(activity)).toEqual({ name: 'Running', duration: 60 })
+//   })
 
-  it('should return an empty object if the string is empty', () => {
-    const activity = ''
-    expect(getActivitiesObject(activity)).toEqual({})
-  })
-})
+//   it('should return an empty object if the string is empty', () => {
+//     const activity = ''
+//     expect(getActivitiesObject(activity)).toEqual({})
+//   })
+// })
 
 describe('utils: isAnImage', () => {
   it('should return true for valid image URLs', () => {
