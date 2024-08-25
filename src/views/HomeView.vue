@@ -145,7 +145,8 @@ onMounted(async () => {
 </script>
 <template>
   <section>
-    <DialogCharacterDetails v-if="showDetails" :character="currentCharacter" @close="showDetails = false" />
+    <DialogCharacterDetails v-if="showDetails && currentCharacter" :character="currentCharacter"
+      @close="showDetails = false" />
     <main>
       <Header @search="onSearchByName" :clear-search="clearSearch" />
       <Tabs @tab-selected="onTabSelected" />
