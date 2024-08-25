@@ -2,6 +2,10 @@
 
 This template should help get you started developing with Vue 3 in Vite.
 
+### DEMO ONLINE 🚀 🌍
+
+Visit => [Rick and Morty](https://frontend-code-challenge.vercel.app/)
+
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
@@ -42,4 +46,12 @@ npm run test:unit
 
 ```sh
 npm run lint
+```
+
+### Environment Variables
+
+Add a `.env` file in the root of the project with the following variables:
+
+```env:
+VITE_BASE_URL='https://rickandmortyapi.com/api'
 ```
