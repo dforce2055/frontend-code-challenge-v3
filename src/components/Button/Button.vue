@@ -15,7 +15,7 @@ const props = defineProps({
     default: 'Button text'
   },
   buttonType: {
-    type: String as PropType<BUTTON_TYPE>,
+    type: String as PropType<BUTTON_TYPE | string>,
     required: false,
     default: BUTTON_TYPE.PRIMARY
   }
