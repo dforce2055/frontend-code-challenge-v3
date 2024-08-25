@@ -186,7 +186,7 @@ const onClickCard = (character: Character) => {
 const onShareCharacter = async () => {
   const BASE_URL = window.location.origin
 
-  const characterFormatted = `Character: ${props.character.name} - Status: ${props.character.status} - Species: ${props.character.species} - ${BASE_URL}/${props.character.id}`
+  const characterFormatted = `Character: ${props.character.name} - Status: ${props.character.status} - Species: ${props.character.species} - ${BASE_URL}/character/${props.character.id}`
 
   navigator?.clipboard?.writeText(characterFormatted)
 
