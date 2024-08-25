@@ -4,7 +4,7 @@ This template should help get you started developing with Vue 3 in Vite.
 
 ### DEMO ONLINE 🚀 🌍
 
-Visit => [Rick and Morty](https://frontend-code-challenge.vercel.app/)
+Visit => [Rick and Morty](https://frontend-code-challenge-v3.vercel.app/)
 
 ## Recommended IDE Setup
 
