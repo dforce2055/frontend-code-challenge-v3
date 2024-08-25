@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onBeforeMount, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useAppStore, useNotificationsStore } from '../store'
 import { getCharacters, type CharacterFilterParams } from '../api/index'
 import type { Character } from '@/types'
