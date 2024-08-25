@@ -2,7 +2,7 @@ import type { CharactersResponse, GENDER, SPECIES, STATUS } from '../types'
 import { toQueryString } from '../utils'
 const BASE_URL = import.meta.env.VITE_BASE_URL ?? 'https://rickandmortyapi.com/api'
 
-const path = {
+export const path = {
   characters: `${BASE_URL}/character`,
   locations: `${BASE_URL}/location`,
   episodes: `${BASE_URL}/episode`

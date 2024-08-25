@@ -12,8 +12,8 @@ const emit = defineEmits(['click'])
 </script>
 <template>
   <span @click="emit('click')" class="cursor-pointer  ">
-    <svg class="border-2 border-white rounded-full" width="30" height="30" viewBox="0 0 30 30" fill="none"
-      xmlns="http://www.w3.org/2000/svg">
+    <svg data-test="icon" class="border-2 border-white rounded-full" width="30" height="30" viewBox="0 0 30 30"
+      fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="15" cy="15" r="15" fill="#E0E0E0" />
       <g clip-path="url(#clip0_706_1535)">
         <path class="transition-all duration-150 ease-linear"
